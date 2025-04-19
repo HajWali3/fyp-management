@@ -23,12 +23,10 @@ const generateAccessAndRefreshToken = async (userId) => {
 };
 
 const registerUser = asyncHandler(async (req, res) => {
-  console.log(req.body); // Log the request body to see if the data is being sent properly
-
-  let { fullname, regNumber, email, password } = req.body;
+  let { fullname, regNumber, email, role, password } = req.body;
 
   if (
-    [fullname, regNumber, email, password].some((field) => {
+    [fullname, regNumber, email, role, password].some((field) => {
       field.trim() === "";
     })
   ) {
@@ -48,6 +46,7 @@ const registerUser = asyncHandler(async (req, res) => {
     fullname,
     regNumber: regNumber.toLowerCase(),
     email,
+    role,
     password,
   });
 

@@ -7,7 +7,6 @@ const userSchema = new Schema(
     fullname: {
       type: String,
       required: true,
-      unique: true,
       lowercase: true,
       trim: true,
       index: true,
@@ -29,6 +28,9 @@ const userSchema = new Schema(
     },
     role: {
       type: String,
+      enum: ["student", "supervisor", "admin"],
+
+      required: true,
     },
     password: {
       type: String,

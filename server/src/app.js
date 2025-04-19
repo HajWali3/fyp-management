@@ -17,6 +17,12 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(express.static("public"));
 app.use(cookieParser());
 
+app.post("/", (req, res) => {
+  console.log("successs");
+
+  res.send("success");
+});
+
 //impoting routes
 import userRouter from "./routes/user.route.js";
 

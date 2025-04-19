@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
+  const [regNumber, setRegNumber] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
@@ -11,12 +11,15 @@ export default function Login() {
     e.preventDefault();
     try {
       const res = await axios.post("/api/v1/users/login", {
-        email,
+        regNumber,
         password,
       });
-      const { token, role } = res.data;
+      const { loginUser, accessToken } = res.data.data;
+      const role = loginUser.role;
 
-      localStorage.setItem("token", token);
+      console.log("loginUser", loginUser);
+
+      localStorage.setItem("token", accessToken);
 
       // Redirect based on role
       if (role === "student") {
@@ -35,9 +38,9 @@ export default function Login() {
     <form onSubmit={handleLogin}>
       <h2>Login</h2>
       <input
-        type="email"
-        placeholder="Email"
-        onChange={(e) => setEmail(e.target.value)}
+        type="text"
+        placeholder="Id"
+        onChange={(e) => setRegNumber(e.target.value)}
       />
       <input
         type="password"
