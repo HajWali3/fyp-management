@@ -10,7 +10,7 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/api/login", {
+      const res = await axios.post("/api/v1/users/login", {
         email,
         password,
       });
